@@ -1,0 +1,16 @@
+
+  <script src="jspm_packages/system.js"></script>
+  <script src="config.js"></script>
+
+  <script>
+<% if (framework === 'angular2') { -%>
+    System.import('reflect-metadata').then(function () {
+      System.import('zone.js');
+    }).then(function () {
+      System.import('index.js')
+    });
+<% } else { -%>
+    System.import('index.js')
+<% } -%>
+  </script>
+</html>
