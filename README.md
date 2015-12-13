@@ -1,5 +1,5 @@
-# Fountain Webpack Generator
+# Fountain SystemJS Generator
 
-Yeoman 'fountain' generator which handle the Webpack config.
+Yeoman 'fountain' generator which handle the SystemJS config.
 
 ## Project under heavy development
