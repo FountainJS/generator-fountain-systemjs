@@ -1,14 +1,10 @@
 
+  <!-- build:js(.tmp) index.js -->
   <script src="jspm_packages/system.js"></script>
   <script src="config.js"></script>
 
   <script>
-<% if (framework === 'angular2') { -%>
-    System.import('reflect-metadata').then(function () {
-      System.import('index.js');
-    });
-<% } else { -%>
     System.import('index.js');
-<% } -%>
   </script>
+  <!-- endbuild -->
 </html>

@@ -28,7 +28,8 @@ module.exports = fountain.Base.extend({
 
       this.mergeJson('package.json', {
         devDependencies: {
-          jspm: '0.16.15'
+          jspm: '^0.16.15',
+          'systemjs-builder': '^0.14.15'
         }
       });
     },
@@ -42,10 +43,12 @@ module.exports = fountain.Base.extend({
   },
 
   writing: {
+    gulp: function () {
+      this.copyTemplate('gulp_tasks', 'gulp_tasks');
+    },
+
     indexHtml: function () {
-      this.replaceInFile('src/index.html', /<\/html>/, {
-        framework: this.props.framework
-      });
+      this.replaceInFile('src/index.html', /<\/html>/);
     }
   },
 
