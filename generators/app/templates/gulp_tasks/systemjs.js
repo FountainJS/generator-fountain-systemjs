@@ -11,8 +11,14 @@ gulp.task('systemjs:html', updateIndexHtml);
 function systemjs(done) {
   const builder = new Builder('./', 'config.js');
 
-  builder.buildStatic(conf.path.src('index.js'), conf.path.tmp('index.js'))
-    .then(() => done(), done);
+  builder.buildStatic(
+<% if (framework === 'angular1') { -%>
+   `${conf.path.src('index.js')} + ${conf.path.tmp('templateCacheHtml.js')}`,
+<% } else { -%>
+    conf.path.src('index.js'),
+<% } -%>
+    conf.path.tmp('index.js')
+  ).then(() => done(), done);
 }
 
 function updateIndexHtml() {

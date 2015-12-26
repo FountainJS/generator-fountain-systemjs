@@ -44,7 +44,7 @@ module.exports = fountain.Base.extend({
 
   writing: {
     gulp: function () {
-      this.copyTemplate('gulp_tasks', 'gulp_tasks');
+      this.copyTemplate('gulp_tasks', 'gulp_tasks', this.props);
     },
 
     indexHtml: function () {
