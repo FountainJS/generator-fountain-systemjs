@@ -1,4 +1,10 @@
 
+<% if (head) { -%>
+    <!-- build:css(.tmp) index.css -->
+    <link rel="stylesheet" href="index.css"></link>
+    <!-- endbuild -->
+  </head>
+<% } else { -%>
   <!-- build:js(.tmp) index.js -->
   <script src="jspm_packages/system.js"></script>
   <script src="config.js"></script>
@@ -8,3 +14,4 @@
   </script>
   <!-- endbuild -->
 </html>
+<% } -%>
