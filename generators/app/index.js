@@ -1,14 +1,17 @@
+'use strict';
+
 const _ = require('lodash');
-var fountain = require('fountain-generator');
+const fountain = require('fountain-generator');
+const conf = require('./conf');
 
 module.exports = fountain.Base.extend({
-  prompting: function () {
+  prompting() {
     this.options.modules = 'systemjs';
     this.fountainPrompting();
   },
 
   configuring: {
-    package: function () {
+    pkg() {
       this.updateJson('package.json', (packageJson) => {
         packageJson.jspm = {
           dependencies: packageJson.dependencies
@@ -34,20 +37,24 @@ module.exports = fountain.Base.extend({
       });
     },
 
-    configjs: function () {
-      this.fs.copyTpl(
-        this.templatePath('config.js'),
-        this.destinationPath('config.js')
-      );
+    configjs() {
+      this.copyTemplate('config.js', 'config.js', {
+        systemConf: conf(this.props)
+      });
     }
   },
 
   writing: {
-    gulp: function () {
-      this.copyTemplate('gulp_tasks', 'gulp_tasks', this.props);
+    gulp() {
+      let entry = this.props.js === 'typescript' ? 'app/index' : 'index';
+      entry = `conf.path.src('${entry}')`;
+      if (this.props.framework === 'angular1') {
+        entry = `\`\${${entry}} + \${conf.path.tmp('templateCacheHtml')}\``;
+      }
+      this.copyTemplate('gulp_tasks', 'gulp_tasks', { entry });
     },
 
-    indexHtml: function () {
+    indexHtml() {
       const props = Object.assign({ head: true }, this.props);
       this.replaceInFile('src/index.html', /<\/head>/, props);
       props.head = false;
@@ -55,7 +62,7 @@ module.exports = fountain.Base.extend({
     }
   },
 
-  installing: function () {
+  installing() {
     this.runInstall('jspm');
   }
 });

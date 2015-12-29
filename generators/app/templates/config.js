@@ -1,4 +1,1 @@
-System.config({
-  defaultJSExtensions: true,
-  transpiler: 'babel'
-});
+System.config(<%- json(systemConf) %>);

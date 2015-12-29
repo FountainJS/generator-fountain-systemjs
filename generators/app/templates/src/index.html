@@ -10,7 +10,11 @@
   <script src="config.js"></script>
 
   <script>
-    System.import('index.js');
+<%   if (js === 'typescript') { -%>
+    System.import('app/index');
+<%   } else { -%>
+    System.import('index');
+<%   } -%>
   </script>
   <!-- endbuild -->
 </html>
