@@ -10,15 +10,6 @@ gulp.task('systemjs:html', updateIndexHtml);
 
 function systemjs(done) {
   const builder = new Builder('./', 'config.js');
-<% if (js === 'typescript') { -%>
-  builder.config({
-    packages: {
-      [conf.path.src('app')]: {
-        defaultExtension: 'ts'
-      }
-    }
-  });
-<% } -%>
 
   builder.buildStatic(
     <%- entry %>,

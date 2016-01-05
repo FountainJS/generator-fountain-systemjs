@@ -18,8 +18,18 @@ module.exports = function systemConf(props) {
       noImplicitAny: false
     };
     conf.packages = {
-      app: { defaultExtension: 'ts' }
+      src: { defaultExtension: 'ts' },
+      typings: { defaultExtension: 'ts' }
     };
+
+    if (props.framework === 'react') {
+      conf.typescriptOptions.jsx = 2;
+      conf.packages.src.defaultExtension = 'tsx';
+    }
+
+    if (props.framework === 'angular1') {
+      conf.packages['.tmp'] = { defaultExtension: 'ts' };
+    }
   }
 
   return conf;

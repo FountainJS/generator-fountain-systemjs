@@ -12,26 +12,35 @@ module.exports = fountain.Base.extend({
 
   configuring: {
     pkg() {
-      this.updateJson('package.json', (packageJson) => {
+      this.updateJson('package.json', packageJson => {
         packageJson.jspm = {
           dependencies: packageJson.dependencies
         };
-        _.forEach(packageJson.jspm.dependencies, function (version, name) {
+        _.forEach(packageJson.jspm.dependencies, (version, name) => {
           packageJson.jspm.dependencies[name] = `npm:${name}@${version}`;
         });
         delete packageJson.dependencies;
-        if (this.props.framework === 'angular1') {
+
+        const moveDevDepsToJspm = dep => {
           packageJson.jspm.devDependencies = {
-            'angular-mocks': `npm:angular-mocks@${packageJson.devDependencies['angular-mocks']}`
+            [dep]: `npm:${dep}@${packageJson.devDependencies[dep]}`
           };
-          delete packageJson.devDependencies['angular-mocks'];
+          delete packageJson.devDependencies[dep];
+        };
+
+        if (this.props.framework === 'angular1') {
+          moveDevDepsToJspm('angular-mocks');
         }
+        if (this.props.framework === 'react' && this.props.js === 'typescript') {
+          moveDevDepsToJspm('react-addons-test-utils');
+        }
+
         return packageJson;
       });
 
       this.mergeJson('package.json', {
         devDependencies: {
-          jspm: '^0.16.15',
+          'jspm': '^0.16.15',
           'systemjs-builder': '^0.14.15'
         }
       });
@@ -46,8 +55,7 @@ module.exports = fountain.Base.extend({
 
   writing: {
     gulp() {
-      let entry = this.props.js === 'typescript' ? 'app/index' : 'index';
-      entry = `conf.path.src('${entry}')`;
+      let entry = `conf.path.src('index')`;
       if (this.props.framework === 'angular1') {
         entry = `\`\${${entry}} + \${conf.path.tmp('templateCacheHtml')}\``;
       }
@@ -55,10 +63,8 @@ module.exports = fountain.Base.extend({
     },
 
     indexHtml() {
-      const props = Object.assign({ head: true }, this.props);
-      this.replaceInFile('src/index.html', /<\/head>/, props);
-      props.head = false;
-      this.replaceInFile('src/index.html', /<\/html>/, props);
+      this.replaceInFile('src/index-head.html', 'src/index.html', /<\/head>/);
+      this.replaceInFile('src/index-footer.html', 'src/index.html', /<\/html>/);
     }
   },
 
