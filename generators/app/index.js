@@ -2,6 +2,7 @@
 
 const _ = require('lodash');
 const fountain = require('fountain-generator');
+const path = require('path');
 const conf = require('./conf');
 
 module.exports = fountain.Base.extend({
@@ -55,6 +56,33 @@ module.exports = fountain.Base.extend({
   },
 
   writing: {
+    transforms() {
+      this.replaceInFiles('src/**/*.js', (content, fileName) => {
+        const baseName = path.basename(fileName, '.js');
+        const componentName = baseName.substr(0, 1).toUpperCase() + baseName.substr(1);
+        // remove es2015 webpack styles imports
+        let result = content.replace(/import '.*ss';\n\n?/g, '');
+        // remove commonjs webpack styles requires
+        result = result.replace(/require\('.*ss'\);\n\n?/g, '');
+        // replace commonjs with es2015 lib imports
+        result = result.replace(
+          /var (.*) = require\(('[^\.].*')\);/g,
+          'import $1 from $2;'
+        );
+        // replace commonjs with es2015 local imports
+        result = result.replace(
+          /var (.*) = require\(('\..*')\);/g,
+          'import { $1 } from $2;'
+        );
+        // replace commonjs with es2015 exports of createClass React components
+        result = result.replace(
+          /module\.exports = React\.createClass/,
+          `export const ${componentName} = React.createClass`
+        );
+        return result;
+      });
+    },
+
     gulp() {
       let entry = `conf.path.src('index')`;
       if (this.props.framework === 'angular1') {
@@ -64,8 +92,16 @@ module.exports = fountain.Base.extend({
     },
 
     indexHtml() {
-      this.replaceInFile('src/index-head.html', 'src/index.html', /<\/head>/);
-      this.replaceInFile('src/index-footer.html', 'src/index.html', /<\/html>/);
+      this.replaceInFileWithTemplate(
+        'src/index-head.html',
+        'src/index.html',
+        /<\/head>/
+      );
+      this.replaceInFileWithTemplate(
+        'src/index-footer.html',
+        'src/index.html',
+        /<\/html>/
+      );
     }
   },
 
