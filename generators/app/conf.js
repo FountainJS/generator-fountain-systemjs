@@ -23,6 +23,7 @@ module.exports = function systemConf(props) {
     };
 
     if (props.framework === 'react') {
+      // https://github.com/Microsoft/TypeScript/issues/5918
       conf.typescriptOptions.jsx = 2;
       conf.packages.src.defaultExtension = 'tsx';
     }
