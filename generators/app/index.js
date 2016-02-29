@@ -3,6 +3,7 @@
 const _ = require('lodash');
 const fountain = require('fountain-generator');
 const conf = require('./conf');
+const transforms = require('./transforms');
 
 module.exports = fountain.Base.extend({
   prompting() {
@@ -55,6 +56,8 @@ module.exports = fountain.Base.extend({
   },
 
   writing: {
+    transforms,
+
     gulp() {
       let entry = `conf.path.src('index')`;
       if (this.props.framework === 'angular1') {
@@ -64,8 +67,16 @@ module.exports = fountain.Base.extend({
     },
 
     indexHtml() {
-      this.replaceInFile('src/index-head.html', 'src/index.html', /<\/head>/);
-      this.replaceInFile('src/index-footer.html', 'src/index.html', /<\/html>/);
+      this.replaceInFileWithTemplate(
+        'src/index-head.html',
+        'src/index.html',
+        /<\/head>/
+      );
+      this.replaceInFileWithTemplate(
+        'src/index-footer.html',
+        'src/index.html',
+        /<\/html>/
+      );
     }
   },
 
