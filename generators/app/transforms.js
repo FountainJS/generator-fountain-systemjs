@@ -25,6 +25,11 @@ module.exports = function transforms() {
       /\.get\('app/,
       '.get(\'src/app'
     );
+    result = result.replace(
+      /templateUrl: 'app/,
+      'templateUrl: \'src/app'
+    );
+
     return result;
   });
 };
