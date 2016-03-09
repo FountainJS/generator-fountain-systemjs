@@ -35,13 +35,28 @@ module.exports = fountain.Base.extend({
         if (this.props.framework === 'react' && this.props.js === 'typescript') {
           moveDevDepsToJspm('react-addons-test-utils');
         }
+        packageJson.jspm.devDependencies = {};
+        if (this.props.js === 'typescript') {
+          packageJson.jspm.dependencies.typescript = 'npm:typescript@1.8.7';
+        } else {
+          packageJson.jspm.dependencies.babel = 'npm:babel-core@^6.6.5';
+          packageJson.jspm.devDependencies['plugin-babel'] = 'npm:systemjs-plugin-babel@^0.0.8';
+        }
+        if (this.props.framework === 'angular2') {
+          packageJson.jspm.devDependencies['babel-plugin-angular2-annotations'] = 'npm:babel-plugin-angular2-annotations@^5.0.0';
+          packageJson.jspm.devDependencies['babel-plugin-transform-decorators-legacy'] = 'npm:babel-plugin-transform-decorators-legacy@^1.3.4';
+          packageJson.jspm.devDependencies['babel-plugin-transform-class-properties'] = 'npm:babel-plugin-transform-class-properties@^6.6.0';
+          packageJson.jspm.devDependencies['babel-plugin-transform-flow-strip-types'] = 'npm:babel-plugin-transform-flow-strip-types@^6.6.4';
+        } else if (this.props.framework === 'react') {
+          packageJson.jspm.devDependencies['babel-preset-react'] = 'npm:babel-preset-react@6.5.0';
+        }
 
         return packageJson;
       });
 
       this.mergeJson('package.json', {
         devDependencies: {
-          'jspm': '^0.16.15',
+          'jspm': '^0.17.0-beta.9',
           'systemjs-builder': '^0.14.15',
           'gulp-replace': '^0.5.4'
         }
@@ -49,7 +64,7 @@ module.exports = fountain.Base.extend({
     },
 
     configjs() {
-      this.copyTemplate('config.js', 'config.js', {
+      this.copyTemplate('jspm.config.js', 'jspm.config.js', {
         systemConf: conf(this.props)
       });
     }

@@ -15,6 +15,11 @@ module.exports = function transforms() {
       /require\(('.*')\);/g,
       'import $1;'
     );
+    // replace imports to add extension
+    result = result.replace(
+      /import (.*) from '.\/(.*)'/g,
+      `import $1 from \'.\/$2.${this.getExtensions(this.props).js}\'`
+    );
     // replace commonjs with es2015 exports
     result = result.replace(
       /module\.exports =/,

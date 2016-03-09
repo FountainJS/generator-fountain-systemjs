@@ -4,8 +4,23 @@ module.exports = function systemConf(props) {
     defaultExtension: 'js'
   };
 
-  if (props.js === 'js' || props.js === 'babel') {
-    conf.transpiler = 'babel';
+  if (props.js !== 'typescript') {
+    // https://github.com/systemjs/plugin-babel
+    conf.transpiler = 'plugin-babel';
+    if (props.framework === 'angular2') {
+      conf.babelOptions = {
+        plugins: [
+          'babel-plugin-angular2-annotations',
+          'babel-plugin-transform-decorators-legacy',
+          'babel-plugin-transform-class-properties',
+          'babel-plugin-transform-flow-strip-types'
+        ]
+      };
+    } else if (props.framework === 'react') {
+      conf.babelOptions = {
+        presets: ['babel-preset-react']
+      };
+    }
   }
 
   if (props.js === 'typescript') {
