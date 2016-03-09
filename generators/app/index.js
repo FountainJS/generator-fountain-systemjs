@@ -38,17 +38,6 @@ module.exports = fountain.Base.extend({
         packageJson.jspm.devDependencies = {};
         if (this.props.js === 'typescript') {
           packageJson.jspm.dependencies.typescript = 'npm:typescript@1.8.7';
-        } else {
-          packageJson.jspm.dependencies.babel = 'npm:babel-core@^6.6.5';
-          packageJson.jspm.devDependencies['plugin-babel'] = 'npm:systemjs-plugin-babel@^0.0.8';
-        }
-        if (this.props.framework === 'angular2') {
-          packageJson.jspm.devDependencies['babel-plugin-angular2-annotations'] = 'npm:babel-plugin-angular2-annotations@^5.0.0';
-          packageJson.jspm.devDependencies['babel-plugin-transform-decorators-legacy'] = 'npm:babel-plugin-transform-decorators-legacy@^1.3.4';
-          packageJson.jspm.devDependencies['babel-plugin-transform-class-properties'] = 'npm:babel-plugin-transform-class-properties@^6.6.0';
-          packageJson.jspm.devDependencies['babel-plugin-transform-flow-strip-types'] = 'npm:babel-plugin-transform-flow-strip-types@^6.6.4';
-        } else if (this.props.framework === 'react') {
-          packageJson.jspm.devDependencies['babel-preset-react'] = 'npm:babel-preset-react@6.5.0';
         }
 
         return packageJson;
