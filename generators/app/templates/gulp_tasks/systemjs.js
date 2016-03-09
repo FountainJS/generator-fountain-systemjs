@@ -9,7 +9,7 @@ gulp.task('systemjs', systemjs);
 gulp.task('systemjs:html', updateIndexHtml);
 
 function systemjs(done) {
-  const builder = new Builder('./', 'config.js');
+  const builder = new Builder('./', 'jspm.config.js');
 
   builder.buildStatic(
     <%- entry %>,

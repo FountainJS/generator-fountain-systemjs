@@ -49,7 +49,7 @@ module.exports = fountain.Base.extend({
     },
 
     configjs() {
-      this.copyTemplate('config.js', 'config.js', {
+      this.copyTemplate('jspm.config.js', 'jspm.config.js', {
         systemConf: conf(this.props)
       });
     }
