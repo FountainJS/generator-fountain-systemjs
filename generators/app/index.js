@@ -37,7 +37,7 @@ module.exports = fountain.Base.extend({
         }
         packageJson.jspm.devDependencies = {};
         if (this.props.js === 'typescript') {
-          packageJson.jspm.dependencies.typescript = 'npm:typescript@1.8.7';
+          packageJson.jspm.dependencies.typescript = 'npm:typescript@^1.8.7';
         }
 
         return packageJson;
