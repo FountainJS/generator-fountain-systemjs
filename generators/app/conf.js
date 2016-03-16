@@ -1,7 +1,10 @@
 module.exports = function systemConf(props) {
   const conf = {
-    defaultJSExtensions: true,
-    defaultExtension: 'js'
+    packages: {
+      src: {
+        defaultExtension: 'js'
+      }
+    }
   };
 
   if (props.js !== 'typescript') {
@@ -41,6 +44,7 @@ module.exports = function systemConf(props) {
       // https://github.com/Microsoft/TypeScript/issues/5918
       conf.typescriptOptions.jsx = 2;
       conf.packages.src.defaultExtension = 'tsx';
+      conf.packages.src.main = 'index';
     }
 
     if (props.framework === 'angular1') {

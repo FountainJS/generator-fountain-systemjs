@@ -1,1 +1,1 @@
-System.config(<%- json(systemConf) %>);
+SystemJS.config(<%- json(systemConf) %>);
