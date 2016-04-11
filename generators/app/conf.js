@@ -36,8 +36,8 @@ module.exports = function systemConf(props) {
       noImplicitAny: false
     };
     conf.packages = {
-      src: { defaultExtension: 'ts' },
-      typings: { defaultExtension: 'ts' }
+      src: {defaultExtension: 'ts'},
+      typings: {defaultExtension: 'ts'}
     };
 
     if (props.framework === 'react') {
@@ -48,7 +48,7 @@ module.exports = function systemConf(props) {
     }
 
     if (props.framework === 'angular1') {
-      conf.packages['.tmp'] = { defaultExtension: 'ts' };
+      conf.packages['.tmp'] = {defaultExtension: 'ts'};
     }
   }
 

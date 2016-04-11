@@ -67,7 +67,7 @@ module.exports = fountain.Base.extend({
       if (this.props.framework === 'angular1') {
         entry = `\`\${${entry}} + \${conf.path.tmp('templateCacheHtml')}\``;
       }
-      this.copyTemplate('gulp_tasks', 'gulp_tasks', { entry });
+      this.copyTemplate('gulp_tasks', 'gulp_tasks', {entry});
     },
 
     indexHtml() {
@@ -85,6 +85,6 @@ module.exports = fountain.Base.extend({
   },
 
   installing() {
-    this.runInstall('jspm', '', { yes: true });
+    this.runInstall('jspm', '', {yes: true});
   }
 });
