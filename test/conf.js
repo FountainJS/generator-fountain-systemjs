@@ -17,6 +17,6 @@ describe('generator fountain systemjs conf', () => {
 
     props.framework = 'angular1';
     jsonConf = conf(props);
-    expect(jsonConf.packages['.tmp']).to.eql({ defaultExtension: 'ts' });
+    expect(jsonConf.packages['.tmp']).to.eql({defaultExtension: 'ts'});
   });
 });
