@@ -23,19 +23,17 @@ module.exports = fountain.Base.extend({
         delete packageJson.dependencies;
 
         const moveDevDepsToJspm = dep => {
-          packageJson.jspm.devDependencies = {
-            [dep]: `npm:${dep}@${packageJson.devDependencies[dep]}`
-          };
+          packageJson.jspm.devDependencies[dep] = `npm:${dep}@${packageJson.devDependencies[dep]}`;
           delete packageJson.devDependencies[dep];
         };
 
+        packageJson.jspm.devDependencies = {};
         if (this.props.framework === 'angular1') {
           moveDevDepsToJspm('angular-mocks');
         }
         if (this.props.framework === 'react' && this.props.js === 'typescript') {
           moveDevDepsToJspm('react-addons-test-utils');
         }
-        packageJson.jspm.devDependencies = {};
         if (this.props.js === 'typescript') {
           packageJson.jspm.dependencies.typescript = 'npm:typescript@^1.8.7';
         }

@@ -12,7 +12,7 @@ describe('generator fountain systemjs package', () => {
   it('should move certain dev deps to jspm', function () {
     let devDependencies = {'angular-mocks': '^1.2.3'};
     this.context.updateJson = (file, update) => {
-      this.context.updateJson[file] = update({devDependencies});
+      this.context.updateJson[file] = update({dependencies: {}, devDependencies});
     };
     const getJspmDevDep = () => this.context.updateJson['package.json'].jspm.devDependencies;
     TestUtils.call(this.context, 'configuring.pkg', {framework: 'angular1'});
