@@ -51,6 +51,9 @@ module.exports = fountain.Base.extend({
     },
 
     configjs() {
+      if (this.props.framework === 'angular1' && this.props.modules === 'systemjs') {
+        this.copyTemplate('jspm.test.js', 'jspm.test.js');
+      }
       this.copyTemplate('jspm.config.js', 'jspm.config.js', {
         systemConf: conf(this.props)
       });
