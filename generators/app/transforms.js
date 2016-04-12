@@ -25,6 +25,11 @@ module.exports = function transforms() {
       /module\.exports =/,
       `export default`
     );
+    // add src prefix to app/techs/techs.json
+    result = result.replace(
+      /'GET', 'app\//,
+      '\'GET\', \'src/app/'
+    );
     // replace xhr urls to add src directory
     result = result.replace(
       /\.get\('app/,
