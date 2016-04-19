@@ -31,7 +31,7 @@ module.exports = fountain.Base.extend({
         if (this.props.framework === 'angular1') {
           moveDevDepsToJspm('angular-mocks');
         }
-        if (this.props.framework === 'react' && this.props.js === 'typescript') {
+        if (this.props.framework === 'react') {
           moveDevDepsToJspm('react-addons-test-utils');
         }
         if (this.props.js === 'typescript') {
