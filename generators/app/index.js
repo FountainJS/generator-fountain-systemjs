@@ -64,9 +64,10 @@ module.exports = fountain.Base.extend({
     transforms,
 
     gulp() {
-      let entry = `conf.path.src('index')`;
+      const extensions = this.getExtensions(this.props);
+      let entry = `conf.path.src('index.${extensions.js}')`;
       if (this.props.framework === 'angular1') {
-        entry = `\`\${${entry}} + \${conf.path.tmp('templateCacheHtml')}\``;
+        entry = `\`\${${entry}} + \${conf.path.tmp('templateCacheHtml.${extensions.js}')}\``;
       }
       this.copyTemplate('gulp_tasks', 'gulp_tasks', {entry});
     },
