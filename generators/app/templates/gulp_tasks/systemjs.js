@@ -1,7 +1,7 @@
 const gulp = require('gulp');
 const replace = require('gulp-replace');
 
-const Builder = require('systemjs-builder');
+const Builder = require('jspm').Builder;
 
 const conf = require('../conf/gulp.conf');
 
