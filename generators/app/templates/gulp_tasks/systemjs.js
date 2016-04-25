@@ -10,7 +10,17 @@ gulp.task('systemjs:html', updateIndexHtml);
 
 function systemjs(done) {
   const builder = new Builder('./', 'jspm.config.js');
-
+  builder.config({
+    paths: {
+      "github:*": "jspm_packages/github/*",
+      "npm:*": "jspm_packages/npm/*"
+    },
+    packageConfigPaths: [
+      'npm:@*/*.json',
+      'npm:*.json',
+      'github:*/*.json'
+    ]
+  });
   builder.buildStatic(
     <%- entry %>,
     conf.path.tmp('index.js')
