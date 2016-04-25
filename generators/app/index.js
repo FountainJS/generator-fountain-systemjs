@@ -32,6 +32,7 @@ module.exports = fountain.Base.extend({
           moveDevDepsToJspm('angular-mocks');
         }
         if (this.props.framework === 'react') {
+          packageJson.jspm.dependencies['babel-polyfill'] = 'npm:babel-polyfill@^6.7.4';
           moveDevDepsToJspm('react-addons-test-utils');
         }
         if (this.props.js === 'typescript') {
