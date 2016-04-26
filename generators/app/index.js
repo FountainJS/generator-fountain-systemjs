@@ -87,6 +87,6 @@ module.exports = fountain.Base.extend({
   },
 
   install() {
-    this.runInstall('jspm', '', {yes: true});
+    this.runInstall('./node_modules/.bin/jspm');
   }
 });
