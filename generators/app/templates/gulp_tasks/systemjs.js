@@ -30,7 +30,7 @@ function systemjs(done) {
 function updateIndexHtml() {
   return gulp.src(conf.path.src('index.html'))
     .pipe(replace(
-      /<script[\s\S]*script>/,
+      /<script>\n\s*System.import.*\n\s*<\/script>/,
       `<script src="index.js"></script>`
     ))
     .pipe(gulp.dest(conf.path.tmp()));
