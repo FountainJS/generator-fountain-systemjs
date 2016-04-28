@@ -21,9 +21,15 @@ function systemjs(done) {
       'github:*/*.json'
     ]
   });
+<% if (framework === 'angular1' && modules === 'systemjs' && js === 'typescript') { -%>
+  const opts = {rollup: false};
+<% } else { -%>
+  const opts = {};
+<% } -%>
   builder.buildStatic(
     <%- entry %>,
-    conf.path.tmp('index.js')
+    conf.path.tmp('index.js'),
+    opts
   ).then(() => done(), done);
 }
 
