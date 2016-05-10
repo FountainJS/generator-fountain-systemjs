@@ -1,4 +1,4 @@
-module.exports = function systemConf(props) {
+module.exports = function systemConf(options) {
   const conf = {
     packages: {
       src: {
@@ -7,10 +7,10 @@ module.exports = function systemConf(props) {
     }
   };
 
-  if (props.js !== 'typescript') {
+  if (options.js !== 'typescript') {
     // https://github.com/systemjs/plugin-babel
     conf.transpiler = 'plugin-babel';
-    if (props.framework === 'angular2') {
+    if (options.framework === 'angular2') {
       conf.babelOptions = {
         plugins: [
           'babel-plugin-angular2-annotations',
@@ -19,14 +19,14 @@ module.exports = function systemConf(props) {
           'babel-plugin-transform-flow-strip-types'
         ]
       };
-    } else if (props.framework === 'react') {
+    } else if (options.framework === 'react') {
       conf.babelOptions = {
         presets: ['babel-preset-react']
       };
     }
   }
 
-  if (props.js === 'typescript') {
+  if (options.js === 'typescript') {
     conf.transpiler = 'typescript';
     conf.typescriptOptions = {
       sourceMap: true,
@@ -40,14 +40,14 @@ module.exports = function systemConf(props) {
       typings: {defaultExtension: 'ts'}
     };
 
-    if (props.framework === 'react') {
+    if (options.framework === 'react') {
       // https://github.com/Microsoft/TypeScript/issues/5918
       conf.typescriptOptions.jsx = 2;
       conf.packages.src.defaultExtension = 'tsx';
       conf.packages.src.main = 'index';
     }
 
-    if (props.framework === 'angular1') {
+    if (options.framework === 'angular1') {
       conf.packages['.tmp'] = {defaultExtension: 'ts'};
     }
   }
