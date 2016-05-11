@@ -6,11 +6,6 @@ const conf = require('./conf');
 const transforms = require('./transforms');
 
 module.exports = fountain.Base.extend({
-  prompting() {
-    this.options.modules = 'systemjs';
-    this.fountainPrompting();
-  },
-
   configuring: {
     pkg() {
       this.updateJson('package.json', packageJson => {
@@ -28,14 +23,14 @@ module.exports = fountain.Base.extend({
         };
 
         packageJson.jspm.devDependencies = {};
-        if (this.props.framework === 'angular1') {
+        if (this.options.framework === 'angular1') {
           moveDevDepsToJspm('angular-mocks');
         }
-        if (this.props.framework === 'react') {
+        if (this.options.framework === 'react') {
           packageJson.jspm.dependencies['babel-polyfill'] = 'npm:babel-polyfill@^6.7.4';
           moveDevDepsToJspm('react-addons-test-utils');
         }
-        if (this.props.js === 'typescript') {
+        if (this.options.js === 'typescript') {
           packageJson.jspm.dependencies.typescript = 'npm:typescript@^1.8.7';
         }
 
@@ -52,11 +47,11 @@ module.exports = fountain.Base.extend({
     },
 
     configjs() {
-      if (this.props.modules === 'systemjs') {
+      if (this.options.modules === 'systemjs') {
         this.copyTemplate('jspm.test.js', 'jspm.test.js');
       }
       this.copyTemplate('jspm.config.js', 'jspm.config.js', {
-        systemConf: conf(this.props)
+        systemConf: conf(this.options)
       });
     }
   },
@@ -65,9 +60,9 @@ module.exports = fountain.Base.extend({
     transforms,
 
     gulp() {
-      const extensions = this.getExtensions(this.props);
+      const extensions = this.getExtensions(this.options);
       let entry = `conf.path.src('index.${extensions.js}')`;
-      if (this.props.framework === 'angular1') {
+      if (this.options.framework === 'angular1') {
         entry = `\`\${${entry}} + \${conf.path.tmp('templateCacheHtml.${extensions.js}')}\``;
       }
       this.copyTemplate('gulp_tasks', 'gulp_tasks', {entry});
