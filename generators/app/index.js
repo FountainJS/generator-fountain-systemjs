@@ -42,6 +42,9 @@ module.exports = fountain.Base.extend({
           'jspm': '^0.17.0-beta.9',
           'systemjs-builder': '^0.15.15',
           'gulp-replace': '^0.5.4'
+        },
+        scripts: {
+          jspm: 'jspm'
         }
       });
     },
