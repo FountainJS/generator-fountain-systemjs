@@ -30,6 +30,10 @@ module.exports = fountain.Base.extend({
           packageJson.jspm.dependencies['babel-polyfill'] = 'npm:babel-polyfill@^6.7.4';
           moveDevDepsToJspm('react-addons-test-utils');
         }
+        if (this.options.sample === 'todoMVC') {
+          packageJson.jspm.dependencies.css = 'github:systemjs/plugin-css@^0.1.21';
+          moveDevDepsToJspm('todomvc-app-css');
+        }
         if (this.options.js === 'typescript') {
           packageJson.jspm.dependencies.typescript = 'npm:typescript@^1.8.7';
         }
