@@ -54,9 +54,8 @@ module.exports = fountain.Base.extend({
     },
 
     configjs() {
-      if (this.options.modules === 'systemjs') {
-        this.copyTemplate('jspm.test.js', 'jspm.test.js');
-      }
+      this.copyTemplate('jspm.test.js', 'jspm.test.js');
+      this.copyTemplate('jspm.browser.js', 'jspm.browser.js');
       this.copyTemplate('jspm.config.js', 'jspm.config.js', {
         systemConf: conf(this.options)
       });
