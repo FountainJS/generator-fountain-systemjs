@@ -6,6 +6,11 @@ module.exports = function transforms() {
     let result = content.replace(/import '.*ss';\n\n?/g, '');
     // remove commonjs webpack styles requires
     result = result.replace(/require\('.*ss'\);\n\n?/g, '');
+    // replace commonjs function imports with es2015 imports
+    result = result.replace(
+      /var (.*) = require\(('.*')\).(.*);/g,
+      'import {$1} from $2;'
+    );
     // replace commonjs with es2015 imports
     result = result.replace(
       /var (.*) = require\(('.*')\);/g,
