@@ -13,6 +13,7 @@ module.exports = function systemConf(options) {
     if (options.framework === 'angular2') {
       conf.babelOptions = {
         plugins: [
+          'babel-plugin-transform-es2015-typeof-symbol',
           'babel-plugin-angular2-annotations',
           'babel-plugin-transform-decorators-legacy',
           'babel-plugin-transform-class-properties',
