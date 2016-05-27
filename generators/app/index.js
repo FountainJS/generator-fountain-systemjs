@@ -32,7 +32,6 @@ module.exports = fountain.Base.extend({
         }
         if (this.options.sample === 'todoMVC') {
           packageJson.jspm.dependencies.css = 'github:systemjs/plugin-css@^0.1.21';
-          moveDevDepsToJspm('todomvc-app-css');
         }
         if (this.options.js === 'typescript') {
           packageJson.jspm.dependencies.typescript = 'npm:typescript@^1.8.7';
