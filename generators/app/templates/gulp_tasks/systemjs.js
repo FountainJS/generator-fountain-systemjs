@@ -14,7 +14,6 @@ gulp.task('systemjs:html', updateIndexHtml);
 function systemjs(done) {
   const builder = new Builder('./', 'jspm.config.js');
   builder.config({
-    production: true,
     paths: {
       "github:*": "jspm_packages/github/*",
       "npm:*": "jspm_packages/npm/*"
@@ -27,7 +26,8 @@ function systemjs(done) {
   });
   builder.buildStatic(
     <%- entry %>,
-    conf.path.tmp('index.js')
+    conf.path.tmp('index.js'),
+    {production: true}
   ).then(() => done(), done);
 }
 
