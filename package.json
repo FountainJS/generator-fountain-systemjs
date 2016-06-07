@@ -1,6 +1,6 @@
 {
   "name": "generator-fountain-systemjs",
-  "version": "0.5.2",
+  "version": "0.5.3",
   "description": "Yeoman 'fountain' generator which handle the SystemJS config",
   "homepage": "",
   "repository": "fountainjs/generator-fountain-systemjs",
@@ -22,7 +22,7 @@
   ],
   "dependencies": {
     "lodash": "^4.9.0",
-    "fountain-generator": "^0.5.2"
+    "fountain-generator": "^0.5.3"
   },
   "devDependencies": {
     "babel-eslint": "^6.0.2",
