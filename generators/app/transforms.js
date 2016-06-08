@@ -2,8 +2,12 @@
 
 module.exports = function transforms() {
   this.replaceInFiles('src/**/*.{js,ts,tsx}', content => {
+    // replace first occurence of commonjs require of react-router module;
+    let result = content.replace(/var ((\w)+) = require\('react-router'\).((\w)+);/, `import {Router, Route, browserHistory} from 'react-router';`);
+    // remove other occurences of commonjs require of react-router module
+    result = result.replace(/var (.*) = require\(('react-router')\).(.*);\n?/g, '');
     // remove es2015 webpack styles imports
-    let result = content.replace(/import '.*ss';\n\n?/g, '');
+    result = result.replace(/import '.*ss';\n\n?/g, '');
     // remove commonjs webpack styles requires
     result = result.replace(/require\('.*ss'\);\n\n?/g, '');
     // replace commonjs function imports with es2015 imports
