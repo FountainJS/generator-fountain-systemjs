@@ -77,14 +77,15 @@ module.exports = fountain.Base.extend({
     },
 
     indexHtml() {
+      const index = this.options.sample === 'jhipster' ? 'src/main/webapp/index.html' : 'src/index.html';
       this.replaceInFileWithTemplate(
         'src/index-head.html',
-        'src/index.html',
+        index,
         /<\/head>/
       );
       this.replaceInFileWithTemplate(
         'src/index-footer.html',
-        'src/index.html',
+        index,
         /<\/html>/
       );
     }
