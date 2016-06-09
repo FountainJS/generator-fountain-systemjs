@@ -30,11 +30,12 @@ module.exports = fountain.Base.extend({
           packageJson.jspm.dependencies['babel-polyfill'] = 'npm:babel-polyfill@^6.7.4';
           moveDevDepsToJspm('react-addons-test-utils');
         }
-        if (this.options.sample === 'todoMVC') {
+        if (this.options.sample === 'todoMVC' || this.options.sample === 'jhipster') {
           packageJson.jspm.dependencies.css = 'github:systemjs/plugin-css@^0.1.21';
-          if (this.options.js === 'js') {
-            moveDevDepsToJspm('es6-shim');
-          }
+          packageJson.jspm.dependencies.bootstrap = 'github:twbs/bootstrap@3.3.6';
+        }
+        if (this.options.sample === 'todoMVC' && this.options.js === 'js') {
+          moveDevDepsToJspm('es6-shim');
         }
         if (this.options.js === 'typescript') {
           packageJson.jspm.dependencies.typescript = 'npm:typescript@^1.8.7';
