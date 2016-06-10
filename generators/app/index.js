@@ -45,8 +45,8 @@ module.exports = fountain.Base.extend({
 
       this.mergeJson('package.json', {
         devDependencies: {
-          'jspm': '0.17.0-beta.17',
-          'systemjs-builder': '0.15.19',
+          'jspm': '0.17.0-beta.18',
+          'systemjs-builder': '0.15.20',
           'gulp-replace': '^0.5.4'
         },
         scripts: {
