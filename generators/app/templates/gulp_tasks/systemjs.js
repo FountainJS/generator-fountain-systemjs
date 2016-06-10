@@ -1,11 +1,7 @@
 const gulp = require('gulp');
 const replace = require('gulp-replace');
 
-<% if (framework === 'angular1') { -%>
-const Builder = require('systemjs-builder');
-<% } else { -%>
 const Builder = require('jspm').Builder;
-<% } -%>
 const conf = require('../conf/gulp.conf');
 
 gulp.task('systemjs', systemjs);
