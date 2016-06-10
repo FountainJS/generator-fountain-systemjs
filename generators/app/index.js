@@ -33,7 +33,7 @@ module.exports = fountain.Base.extend({
         if (this.options.sample === 'todoMVC') {
           packageJson.jspm.dependencies.css = 'github:systemjs/plugin-css@^0.1.21';
           if (this.options.js === 'js') {
-            moveDevDepsToJspm('es6-shim');
+            packageJson.jspm.dependencies['es6-shim'] = 'npm:es6-shim@^0.35.0';
           }
         }
         if (this.options.js === 'typescript') {
