@@ -3,9 +3,9 @@
 module.exports = function transforms() {
   this.replaceInFiles('src/**/*.{js,ts,tsx}', content => {
     // remove es2015 webpack styles imports
-    let result = content.replace(/import '.*ss';\n\n?/g, '');
+    let result = content.replace(/import '.*(styl|.*ss)';\n\n?/g, '');
     // remove commonjs webpack styles requires
-    result = result.replace(/require\('.*ss'\);\n\n?/g, '');
+    result = result.replace(/require\('.*(styl|.*ss)'\);\n\n?/g, '');
     // replace commonjs function imports with es2015 imports
     result = result.replace(
       /var (.*) = require\(('.*')\).(.*);/g,
