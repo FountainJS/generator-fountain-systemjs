@@ -33,7 +33,7 @@ module.exports = fountain.Base.extend({
         if (this.options.sample === 'todoMVC') {
           packageJson.jspm.dependencies.css = 'github:systemjs/plugin-css@^0.1.21';
           if (this.options.js === 'js') {
-            moveDevDepsToJspm('es6-shim');
+            packageJson.jspm.dependencies['es6-shim'] = 'npm:es6-shim@^0.35.0';
           }
         }
         if (this.options.js === 'typescript') {
@@ -45,8 +45,8 @@ module.exports = fountain.Base.extend({
 
       this.mergeJson('package.json', {
         devDependencies: {
-          'jspm': '0.17.0-beta.17',
-          'systemjs-builder': '0.15.19',
+          'jspm': '0.17.0-beta.18',
+          'systemjs-builder': '0.15.20',
           'gulp-replace': '^0.5.4'
         },
         scripts: {

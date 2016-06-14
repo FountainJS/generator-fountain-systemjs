@@ -7,9 +7,9 @@ module.exports = function transforms() {
     // remove other occurences of commonjs require of react-router module
     result = result.replace(/var (.*) = require\(('react-router')\).(.*);\n?/g, '');
     // remove es2015 webpack styles imports
-    result = result.replace(/import '.*ss';\n\n?/g, '');
+    result = result.replace(/import '.*(styl|.*ss)';\n\n?/g, '');
     // remove commonjs webpack styles requires
-    result = result.replace(/require\('.*ss'\);\n\n?/g, '');
+    result = result.replace(/require\('.*(styl|.*ss)'\);\n\n?/g, '');
     // replace commonjs function imports with es2015 imports
     result = result.replace(
       /var (.*) = require\(('.*')\).(.*);/g,
