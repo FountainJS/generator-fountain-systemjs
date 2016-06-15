@@ -27,7 +27,10 @@ function systemjs(done) {
   builder.buildStatic(
     <%- entry %>,
     conf.path.tmp('index.js'),
-    {production: true}
+    {
+      production: true,
+      browser: true
+    }
   ).then(() => done(), done);
 }
 
