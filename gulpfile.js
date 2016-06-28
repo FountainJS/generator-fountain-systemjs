@@ -20,7 +20,7 @@ function nodeSecurityProtocol(cb) {
 }
 
 function eslintCheck() {
-  return gulp.src(['**/*.js', '!**/templates/**'])
+  return gulp.src(['**/*.js', '!**/templates/**', '!test/assets/**'])
     .pipe(excludeGitignore())
     .pipe(eslint())
     .pipe(eslint.format())
