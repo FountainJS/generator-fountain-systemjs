@@ -7,26 +7,6 @@ module.exports = function systemConf(options) {
     }
   };
 
-  if (options.js !== 'typescript') {
-    // https://github.com/systemjs/plugin-babel
-    conf.transpiler = 'plugin-babel';
-    if (options.framework === 'angular2') {
-      conf.babelOptions = {
-        plugins: [
-          'babel-plugin-transform-es2015-typeof-symbol',
-          'babel-plugin-angular2-annotations',
-          'babel-plugin-transform-decorators-legacy',
-          'babel-plugin-transform-class-properties',
-          'babel-plugin-transform-flow-strip-types'
-        ]
-      };
-    } else if (options.framework === 'react') {
-      conf.babelOptions = {
-        presets: ['babel-preset-react']
-      };
-    }
-  }
-
   if (options.js === 'typescript') {
     conf.transpiler = 'typescript';
     conf.typescriptOptions = {
@@ -50,6 +30,24 @@ module.exports = function systemConf(options) {
 
     if (options.framework === 'angular1') {
       conf.packages['.tmp'] = {defaultExtension: 'ts'};
+    }
+  } else {
+    // https://github.com/systemjs/plugin-babel
+    conf.transpiler = 'plugin-babel';
+    if (options.framework === 'angular2') {
+      conf.babelOptions = {
+        plugins: [
+          'babel-plugin-transform-es2015-typeof-symbol',
+          'babel-plugin-angular2-annotations',
+          'babel-plugin-transform-decorators-legacy',
+          'babel-plugin-transform-class-properties',
+          'babel-plugin-transform-flow-strip-types'
+        ]
+      };
+    } else if (options.framework === 'react') {
+      conf.babelOptions = {
+        presets: ['babel-preset-react']
+      };
     }
   }
 

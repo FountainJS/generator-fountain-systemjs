@@ -4,6 +4,9 @@
   </a>
 </p>
 
+[![Build Status](https://travis-ci.org/FountainJS/generator-fountain-systemjs.svg?branch=master)](https://travis-ci.org/FountainJS/generator-fountain-systemjs)
+[![codecov](https://codecov.io/gh/FountainJS/generator-fountain-systemjs/branch/master/graph/badge.svg)](https://codecov.io/gh/FountainJS/generator-fountain-systemjs)  
+
 # Fountain SystemJS Generator
 
 Yeoman 'fountain' generator which handle the SystemJS config.
