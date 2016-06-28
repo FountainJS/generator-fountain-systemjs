@@ -12,7 +12,7 @@ gulp.task('systemjs', systemjs);
 <% if (framework === 'angular2') { -%>
 gulp.task('systemjs:html', gulp.parallel(updateIndexHtml, copyVendor));
 <% } else { -%>
-gulp.task('systemjs:html', updateIndexHtml));
+gulp.task('systemjs:html', updateIndexHtml);
 <% } -%>
 
 function systemjs(done) {
