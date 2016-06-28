@@ -49,6 +49,15 @@ test(`Move dependencies to jspm from 'package.json'`, t => {
   t.deepEqual(context.mergeJson['package.json'], _.merge({}, base, context.mergeJson['package.json']));
 });
 
+test(`Add 'reflect-metadata' to 'package.json' dependencies if framework is 'angular2'`, t => {
+  context.updateJson['package.json'] = {
+    dependencies: {},
+    devDependencies: {}
+  };
+  TestUtils.call(context, 'configuring.pkg', {framework: 'angular2', js: 'typescript'});
+  t.is(context.updateJson['package.json'].dependencies['reflect-metadata'], '0.1.3');
+});
+
 test(`Delete dependencies from 'package.json'`, t => {
   context.updateJson['package.json'] = {
     dependencies: {react: '^15.0.1'},
