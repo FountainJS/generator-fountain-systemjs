@@ -26,6 +26,11 @@ module.exports = fountain.Base.extend({
         if (this.options.framework === 'angular1') {
           moveDevDepsToJspm('angular-mocks');
         }
+        if (this.options.framework === 'angular2') {
+          packageJson.dependencies = {
+            'reflect-metadata': '0.1.3'
+          };
+        }
         if (this.options.framework === 'react') {
           packageJson.jspm.dependencies['babel-polyfill'] = 'npm:babel-polyfill@^6.7.4';
           moveDevDepsToJspm('react-addons-test-utils');
@@ -45,8 +50,8 @@ module.exports = fountain.Base.extend({
 
       this.mergeJson('package.json', {
         devDependencies: {
-          'jspm': '0.17.0-beta.18',
-          'systemjs-builder': '0.15.20',
+          'jspm': '0.17.0-beta.22',
+          'systemjs-builder': '0.15.23',
           'gulp-replace': '^0.5.4'
         },
         scripts: {

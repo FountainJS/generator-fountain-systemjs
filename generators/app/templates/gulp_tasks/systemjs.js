@@ -9,7 +9,11 @@ const Builder = require('jspm').Builder;
 const conf = require('../conf/gulp.conf');
 
 gulp.task('systemjs', systemjs);
-gulp.task('systemjs:html', updateIndexHtml);
+<% if (framework === 'angular2') { -%>
+gulp.task('systemjs:html', gulp.parallel(updateIndexHtml, copyVendor));
+<% } else { -%>
+gulp.task('systemjs:html', updateIndexHtml));
+<% } -%>
 
 function systemjs(done) {
   const builder = new Builder('./', 'jspm.config.js');
@@ -33,6 +37,15 @@ function systemjs(done) {
     }
   ).then(() => done(), done);
 }
+<% if (framework === 'angular2') { -%>
+
+function copyVendor() {
+  return gulp.src([
+    'node_modules/reflect-metadata/Reflect.js'
+  ])
+  .pipe(gulp.dest(conf.path.dist('vendor')));
+}
+<% } -%>
 
 function updateIndexHtml() {
   return gulp.src(conf.path.src('index.html'))
@@ -40,5 +53,11 @@ function updateIndexHtml() {
       /<script src="jspm_packages\/system.js">[\s\S]*System.import.*\n\s*<\/script>/,
       `<script src="index.js"></script>`
     ))
+<% if (framework === 'angular2') { -%>
+    .pipe(replace(
+      /<!-- <script src="(node_modules)(\/([\s\S]*?))*"><\/script> -->/g,
+      `<script src="vendor$2"></script>`
+    ))
+<% } -%>
     .pipe(gulp.dest(conf.path.tmp()));
 }
