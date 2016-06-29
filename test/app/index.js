@@ -117,6 +117,11 @@ test(`gulp(): copy 'gulp_tasks/systemjs.js' when framework is react`, t => {
   t.true(context.copyTemplate['gulp_tasks/systemjs.js'].length > 0);
 });
 
+test(`gulp(): copy 'gulp_tasks/systemjs.js' when framework is angular2`, t => {
+  TestUtils.call(context, 'writing.gulp', {framework: 'angular2'});
+  t.true(context.copyTemplate['gulp_tasks/systemjs.js'].length > 0);
+});
+
 test(`indexHtml(): Call replaceInFileWithTemplate twice`, () => {
   context.templatePath = context.destinationPath = path => path;
   context.replaceInFileWithTemplate = () => {};

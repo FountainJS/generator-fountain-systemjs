@@ -3,15 +3,20 @@ const replace = require('gulp-replace');
 
 <% if (framework === 'angular1') { -%>
 const Builder = require('systemjs-builder');
+<% } else if (framework === 'angular2') { -%>
+const Builder = require('jspm').Builder;
+const inlineNg2Template = require('gulp-inline-ng2-template');
+const del = require('del');
 <% } else { -%>
 const Builder = require('jspm').Builder;
 <% } -%>
 const conf = require('../conf/gulp.conf');
 
-gulp.task('systemjs', systemjs);
 <% if (framework === 'angular2') { -%>
+gulp.task('systemjs', gulp.series(replaceTemplates, systemjs));
 gulp.task('systemjs:html', gulp.parallel(updateIndexHtml, copyVendor));
 <% } else { -%>
+gulp.task('systemjs', systemjs);
 gulp.task('systemjs:html', updateIndexHtml);
 <% } -%>
 
@@ -35,7 +40,12 @@ function systemjs(done) {
       production: true,
       browser: true
     }
-  ).then(() => done(), done);
+  ).then(() => {
+<% if (framework === 'angular2') { -%>
+    del([conf.path.tmp('templates')]);
+<% } -%>
+    done();
+  }, done);
 }
 <% if (framework === 'angular2') { -%>
 
@@ -44,6 +54,12 @@ function copyVendor() {
     'node_modules/reflect-metadata/Reflect.js'
   ])
   .pipe(gulp.dest(conf.path.dist('vendor')));
+}
+
+function replaceTemplates() {
+  return gulp.src(conf.path.src(`**/*.<%- extensions.js %>`))
+    .pipe(inlineNg2Template({base: conf.path.src('app'), useRelativePaths: true}))
+    .pipe(gulp.dest(conf.path.tmp('templates')));
 }
 <% } -%>
 
