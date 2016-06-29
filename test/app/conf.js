@@ -12,7 +12,7 @@ const conf = {
 };
 
 const typescriptBase = {
-  transpiler: 'typescript',
+  transpiler: 'ts',
   typescriptOptions: {
     sourceMap: true,
     emitDecoratorMetadata: true,

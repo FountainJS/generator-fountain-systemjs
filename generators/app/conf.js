@@ -8,7 +8,7 @@ module.exports = function systemConf(options) {
   };
 
   if (options.js === 'typescript') {
-    conf.transpiler = 'typescript';
+    conf.transpiler = 'ts';
     conf.typescriptOptions = {
       sourceMap: true,
       emitDecoratorMetadata: true,

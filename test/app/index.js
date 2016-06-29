@@ -39,7 +39,7 @@ test(`Move dependencies to jspm from 'package.json'`, t => {
     jspm: {
       dependencies: {
         angular: 'npm:angular@^1.5.0',
-        typescript: 'npm:typescript@^1.8.7'
+        ts: 'github:frankwallis/plugin-typescript@4.0.16'
       },
       devDependencies: {'angular-mocks': 'npm:angular-mocks@^1.5.0'}
     }

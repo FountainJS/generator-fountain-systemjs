@@ -42,7 +42,7 @@ module.exports = fountain.Base.extend({
           }
         }
         if (this.options.js === 'typescript') {
-          packageJson.jspm.dependencies.typescript = 'npm:typescript@^1.8.7';
+          packageJson.jspm.dependencies.ts = 'github:frankwallis/plugin-typescript@4.0.16';
         }
 
         return packageJson;
