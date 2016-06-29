@@ -6,6 +6,7 @@ var Test = require('lib').Test;
 var angular = require('angular');
 require('es6-shim');
 import {App} from './app';
+import file from '../file';
 module.exports = 1;
 class Techs {
   getTechs() {
