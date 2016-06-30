@@ -1,7 +1,7 @@
 const gulp = require('gulp');
 const replace = require('gulp-replace');
 
-<% if (framework === 'angular1') { -%>
+<% if (framework === 'angular1' && js !== 'typescript') { -%>
 const Builder = require('systemjs-builder');
 <% } else if (framework === 'angular2') { -%>
 const Builder = require('jspm').Builder;
