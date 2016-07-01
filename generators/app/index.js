@@ -42,7 +42,7 @@ module.exports = fountain.Base.extend({
           }
         }
         if (this.options.js === 'typescript') {
-          packageJson.jspm.dependencies.typescript = 'npm:typescript@^1.8.7';
+          packageJson.jspm.dependencies.ts = 'github:frankwallis/plugin-typescript@4.0.16';
         }
 
         return packageJson;
@@ -78,7 +78,10 @@ module.exports = fountain.Base.extend({
       if (this.options.framework === 'angular1') {
         entry = `\`\${${entry}} + \${conf.path.tmp('templateCacheHtml.${extensions.js}')}\``;
       }
-      this.copyTemplate('gulp_tasks', 'gulp_tasks', {entry});
+      if (this.options.framework === 'angular2') {
+        entry = `conf.path.tmp('templates/index.${extensions.js}')`;
+      }
+      this.copyTemplate('gulp_tasks', 'gulp_tasks', {entry, extensions});
     },
 
     indexHtml() {

@@ -21,6 +21,7 @@ test('Test transforms()', t => {
   t.true(result.indexOf(`import angular from 'angular'`) > -1);
   t.true(result.indexOf(`import 'es6-shim'`) > -1);
   t.true(result.indexOf(`import {App} from './app.js'`) > -1);
+  t.true(result.indexOf(`import file from '../file.js';`) > -1);
   t.true(result.indexOf(`export default 1`) > -1);
   t.true(result.indexOf(`.get('src/app/techs/techs.json')`) > -1);
   t.true(result.indexOf(`templateUrl: 'src/app/footer.html'`) > -1);

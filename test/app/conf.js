@@ -12,7 +12,7 @@ const conf = {
 };
 
 const typescriptBase = {
-  transpiler: 'typescript',
+  transpiler: 'ts',
   typescriptOptions: {
     sourceMap: true,
     emitDecoratorMetadata: true,
@@ -28,7 +28,7 @@ const typescriptBase = {
 
 test('systemConf with react/typescript', t => {
   const options = {js: 'typescript', framework: 'react'};
-  const expected = {
+  const expected = _.mergeWith({}, conf, typescriptBase, {
     typescriptOptions: {jsx: 2},
     packages: {
       src: {
@@ -36,27 +36,27 @@ test('systemConf with react/typescript', t => {
         main: 'index'
       }
     }
-  };
+  });
   const result = systemConf(options);
-  t.deepEqual(result, _.mergeWith({}, conf, typescriptBase, expected));
+  t.deepEqual(result, expected);
 });
 
 test('systemConf with angular1/typescript', t => {
   const options = {js: 'typescript', framework: 'angular1'};
-  const expected = {
+  const expected = _.mergeWith({}, conf, typescriptBase, {
     packages: {
       ['.tmp']: {
         defaultExtension: 'ts'
       }
     }
-  };
+  });
   const result = systemConf(options);
-  t.deepEqual(result, _.mergeWith({}, conf, typescriptBase, expected));
+  t.deepEqual(result, expected);
 });
 
 test('systemConf with babel/angular2', t => {
   const options = {js: 'babel', framework: 'angular2'};
-  const expected = {
+  const expected = _.mergeWith({}, conf, {
     transpiler: 'plugin-babel',
     babelOptions: {
       plugins: [
@@ -67,28 +67,28 @@ test('systemConf with babel/angular2', t => {
         'babel-plugin-transform-flow-strip-types'
       ]
     }
-  };
+  });
   const result = systemConf(options);
-  t.deepEqual(result, _.mergeWith({}, conf, expected));
+  t.deepEqual(result, expected);
 });
 
 test('systemConf with react/babel', t => {
   const options = {js: 'babel', framework: 'react'};
-  const expected = {
+  const expected = _.mergeWith({}, conf, {
     transpiler: 'plugin-babel',
     babelOptions: {
       presets: ['babel-preset-react']
     }
-  };
+  });
   const result = systemConf(options);
-  t.deepEqual(result, _.mergeWith({}, conf, expected));
+  t.deepEqual(result, expected);
 });
 
 test(t => {
   const options = {js: 'babel', framework: 'angular1'};
-  const expected = {
+  const expected = _.mergeWith({}, conf, {
     transpiler: 'plugin-babel'
-  };
+  });
   const result = systemConf(options);
-  t.deepEqual(result, _.mergeWith({}, conf, expected));
+  t.deepEqual(result, expected);
 });

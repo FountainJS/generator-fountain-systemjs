@@ -39,7 +39,7 @@ test(`Move dependencies to jspm from 'package.json'`, t => {
     jspm: {
       dependencies: {
         angular: 'npm:angular@^1.5.0',
-        typescript: 'npm:typescript@^1.8.7'
+        ts: 'github:frankwallis/plugin-typescript@4.0.16'
       },
       devDependencies: {'angular-mocks': 'npm:angular-mocks@^1.5.0'}
     }
@@ -114,6 +114,11 @@ test(`gulp(): copy 'gulp_tasks/systemjs.js' when framework is angular1`, t => {
 
 test(`gulp(): copy 'gulp_tasks/systemjs.js' when framework is react`, t => {
   TestUtils.call(context, 'writing.gulp', {framework: 'react'});
+  t.true(context.copyTemplate['gulp_tasks/systemjs.js'].length > 0);
+});
+
+test(`gulp(): copy 'gulp_tasks/systemjs.js' when framework is angular2`, t => {
+  TestUtils.call(context, 'writing.gulp', {framework: 'angular2'});
   t.true(context.copyTemplate['gulp_tasks/systemjs.js'].length > 0);
 });
 
