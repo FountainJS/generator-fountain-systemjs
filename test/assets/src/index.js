@@ -8,6 +8,9 @@ require('es6-shim');
 import {App} from './app';
 import file from '../file';
 module.exports = 1;
+@Component({
+  template: require('./Techs.html')
+})
 class Techs {
   getTechs() {
     return this.http

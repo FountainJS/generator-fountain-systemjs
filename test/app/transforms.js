@@ -25,4 +25,5 @@ test('Test transforms()', t => {
   t.true(result.indexOf(`export default 1`) > -1);
   t.true(result.indexOf(`.get('src/app/techs/techs.json')`) > -1);
   t.true(result.indexOf(`templateUrl: 'src/app/footer.html'`) > -1);
+  t.true(result.indexOf(`templateUrl: 'Techs.html'`) > -1);
 });
