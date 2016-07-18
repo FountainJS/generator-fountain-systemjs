@@ -6,8 +6,8 @@ test.before(() => {
   process.chdir('../../');
 });
 
-test('Test transforms()', t => {
-  context.options = {js: 'js'};
+test('Test transforms() if framework is angular2', t => {
+  context.options = {js: 'js', framework: 'angular2'};
   context.copyTemplate('../../../test/assets/src/index.js', 'test/assets/src/index.js');
   context.destinationPath = path => path;
   const transforms = require('../../generators/app/transforms');
@@ -25,5 +25,16 @@ test('Test transforms()', t => {
   t.true(result.indexOf(`export default 1`) > -1);
   t.true(result.indexOf(`.get('src/app/techs/techs.json')`) > -1);
   t.true(result.indexOf(`templateUrl: 'src/app/footer.html'`) > -1);
+  t.true(result.indexOf('moduleId: __moduleName') > -1);
   t.true(result.indexOf(`templateUrl: 'Techs.html'`) > -1);
+});
+
+test('Test transforms() if framework is angular1', t => {
+  context.options = {js: 'js', framework: 'angular1'};
+  context.copyTemplate('../../../test/assets/src/index.js', 'test/assets/src/index.js');
+  context.destinationPath = path => path;
+  const transforms = require('../../generators/app/transforms');
+  transforms.apply(context);
+  const result = context.copyTemplate['test/assets/src/index.js'];
+  t.is(result.indexOf(`templateUrl: 'Techs.html'`), -1);
 });
