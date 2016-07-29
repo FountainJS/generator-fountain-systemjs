@@ -48,10 +48,12 @@ module.exports = function transforms() {
       /templateUrl: 'app/,
       'templateUrl: \'src/app'
     );
-    result = result.replace(
-      /template: require\('.\/(.*)'\)/,
-      `moduleId: __moduleName,\n  templateUrl: '$1'`
-    );
+    if (this.options.framework === 'angular2') {
+      result = result.replace(
+        /template: require\('.\/(.*)'\)/,
+        `moduleId: __moduleName,\n  templateUrl: '$1'`
+      );
+    }
 
     return result;
   });
