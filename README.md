@@ -9,7 +9,7 @@
 
 # Fountain SystemJS Generator
 
-Yeoman 'fountain' generator which handle the SystemJS config.
+Yeoman Fountain generator which handle the SystemJS config.
 
 ## Usage
 
