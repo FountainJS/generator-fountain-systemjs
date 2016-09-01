@@ -13,8 +13,8 @@ SystemJS.import('jspm.config.js').then(() => {
     const testing = providers[0];
     const testingBrowser = providers[1];
 
-    testing.setBaseTestProviders(testingBrowser.TEST_BROWSER_DYNAMIC_PLATFORM_PROVIDERS,
-      testingBrowser.TEST_BROWSER_DYNAMIC_APPLICATION_PROVIDERS);
+    testing.TestBed.initTestEnvironment(testingBrowser.BrowserDynamicTestingModule,
+      testingBrowser.platformBrowserDynamicTesting());
   });
 });
 <% } -%>
