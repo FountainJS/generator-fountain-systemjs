@@ -27,9 +27,7 @@ module.exports = fountain.Base.extend({
           moveDevDepsToJspm('angular-mocks');
         }
         if (this.options.framework === 'angular2') {
-          packageJson.dependencies = {
-            'reflect-metadata': '0.1.3'
-          };
+          packageJson.jspm.dependencies['reflect-metadata'] = 'npm:reflect-metadata@^0.1.3';
         }
         if (this.options.framework === 'react') {
           packageJson.jspm.dependencies['babel-polyfill'] = 'npm:babel-polyfill@^6.7.4';
