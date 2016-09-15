@@ -25,26 +25,35 @@ SystemJS.config({
   }
 });
 <% if (framework === 'angular2') { -%>
-SystemJS.import('jspm.config.js').then(() => {
-  return Promise.all([
-    System.import('@angular/core/testing'),
-    System.import('@angular/platform-browser-dynamic/testing'),
-    System.import('@angular/common'),
-    System.import('core-js/client/shim'),
-    System.import('zone.js/dist/zone'),
-    System.import('zone.js/dist/long-stack-trace-zone'),
-    System.import('zone.js/dist/proxy'),
-    System.import('zone.js/dist/async-test'),
-    System.import('zone.js/dist/fake-async-test'),
-    System.import('zone.js/dist/sync-test'),
-    System.import('zone.js/dist/jasmine-patch'),
-    System.import('reflect-metadata')
-  ]).then(providers => {
+SystemJS.import('jspm.config.js')
+  .then(() => {
+    return Promise.all([
+      System.import('core-js/client/shim'),
+      System.import('zone.js/dist/zone'),
+      System.import('reflect-metadata')
+    ]);
+  }).then(() => {
+    return Promise.all([
+      System.import('zone.js/dist/long-stack-trace-zone'),
+      System.import('zone.js/dist/proxy'),
+      System.import('zone.js/dist/async-test'),
+      System.import('zone.js/dist/fake-async-test'),
+      System.import('zone.js/dist/sync-test'),
+      System.import('zone.js/dist/jasmine-patch')
+    ]);
+  }).then(() => {
+    return Promise.all([
+      System.import('@angular/core/testing'),
+      System.import('@angular/platform-browser-dynamic/testing'),
+      System.import('@angular/common')
+    ]);
+  }).then(providers => {
     const testing = providers[0];
     const testingBrowser = providers[1];
 
-    testing.TestBed.initTestEnvironment(testingBrowser.BrowserDynamicTestingModule,
-      testingBrowser.platformBrowserDynamicTesting());
+    testing.TestBed.initTestEnvironment(
+      testingBrowser.BrowserDynamicTestingModule,
+      testingBrowser.platformBrowserDynamicTesting()
+    );
   });
-});
 <% } -%>
