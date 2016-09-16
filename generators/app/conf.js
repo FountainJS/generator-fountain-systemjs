@@ -51,5 +51,19 @@ module.exports = function systemConf(options) {
     }
   }
 
+  if (options.framework === 'angular2') {
+    conf.map = {
+      "@angular/core/testing": "npm:@angular/core@2.0.0/bundles/core-testing.umd.js",
+      "@angular/compiler/testing": "npm:@angular/compiler@2.0.0/bundles/compiler-testing.umd.js",
+      "@angular/platform-browser/testing": "npm:@angular/platform-browser@2.0.0/bundles/platform-browser-testing.umd.js",
+      "@angular/platform-browser-dynamic/testing": "npm:@angular/platform-browser-dynamic@2.0.0/bundles/platform-browser-dynamic-testing.umd.js",
+      "@angular/http/testing": "npm:@angular/http@2.0.0/bundles/http-testing.umd.js"
+    };
+
+    if (options.sample === 'todoMVC') {
+      conf.map['@angular/forms/testing'] = 'npm:@angular/forms@2.0.0/bundles/forms-testing.umd.js';
+    }
+  }
+
   return conf;
 };

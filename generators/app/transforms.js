@@ -12,17 +12,22 @@ module.exports = function transforms() {
     result = result.replace(/require\('.*(styl|.*ss)'\);\n\n?/g, '');
     // replace commonjs function imports with es2015 imports
     result = result.replace(
-      /var (.*) = require\(('.*')\).(.*);/g,
-      'import {$1} from $2;'
+      /(^|\n)var (.*) = require\(('.*')\).(.*);/g,
+      '$1import {$2} from $3;'
     );
     // replace commonjs with es2015 imports
     result = result.replace(
-      /var (.*) = require\(('.*')\);/g,
-      'import $1 from $2;'
+      /(^|\n)var (.*) = require\(('.*')\);/g,
+      '$1import $2 from $3;'
     );
     result = result.replace(
-      /require\(('.*')\);/g,
-      'import $1;'
+      /(^|\n)require\(('.*')\);/g,
+      '$1import $2;'
+    );
+    // replace commonjs conditional require by System.import
+    result = result.replace(
+      /(^|\n)(\s+)require\(('.*')\);/g,
+      '$1$2System.import($3);'
     );
     // replace imports to add extension
     result = result.replace(
