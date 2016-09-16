@@ -21,7 +21,22 @@ function syncStart () {
   }
 }
 
+var depRegex = /(.*)(@angular\/)(.*)(@.*)/;
+
+function mapAngularTestingBundles() {
+  var systemMap = System.getConfig().map;
+  for (const depKey in systemMap) {
+    var depValue = systemMap[depKey];
+    if (depRegex.test(depValue)) {
+      var key = depValue.replace(depRegex, '$2$3/testing');
+      var value = depValue.replace(depRegex, '$1$2$3$4/bundles/$3-testing.umd.js');
+      systemMap[key] = value;
+    }
+  }
+}
+
 SystemJS.import('jspm.config.js')
+  .then(mapAngularTestingBundles)
   .then(() => System.import('reflect-metadata'))
   .then(() => System.import('core-js/client/shim'))
   .then(() => System.import('zone.js/dist/zone'))
