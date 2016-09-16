@@ -25,7 +25,7 @@ var depRegex = /(.*)(@angular\/)(.*)(@.*)/;
 
 function mapAngularTestingBundles() {
   var systemMap = System.getConfig().map;
-  for (const depKey in systemMap) {
+  for (var depKey in systemMap) {
     var depValue = systemMap[depKey];
     if (depRegex.test(depValue)) {
       var key = depValue.replace(depRegex, '$2$3/testing');
