@@ -14,11 +14,10 @@ const conf = require('../conf/gulp.conf');
 
 <% if (framework === 'angular2') { -%>
 gulp.task('systemjs', gulp.series(replaceTemplates, systemjs));
-gulp.task('systemjs:html', updateIndexHtml);
 <% } else { -%>
 gulp.task('systemjs', systemjs);
-gulp.task('systemjs:html', updateIndexHtml);
 <% } -%>
+gulp.task('systemjs:html', updateIndexHtml);
 
 function systemjs(done) {
   const builder = new Builder('./', 'jspm.config.js');
