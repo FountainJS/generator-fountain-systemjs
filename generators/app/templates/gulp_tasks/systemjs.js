@@ -14,11 +14,10 @@ const conf = require('../conf/gulp.conf');
 
 <% if (framework === 'angular2') { -%>
 gulp.task('systemjs', gulp.series(replaceTemplates, systemjs));
-gulp.task('systemjs:html', gulp.parallel(updateIndexHtml, copyVendor));
 <% } else { -%>
 gulp.task('systemjs', systemjs);
-gulp.task('systemjs:html', updateIndexHtml);
 <% } -%>
+gulp.task('systemjs:html', updateIndexHtml);
 
 function systemjs(done) {
   const builder = new Builder('./', 'jspm.config.js');
@@ -48,13 +47,6 @@ function systemjs(done) {
   }, done);
 }
 <% if (framework === 'angular2') { -%>
-
-function copyVendor() {
-  return gulp.src([
-    'node_modules/reflect-metadata/Reflect.js'
-  ])
-  .pipe(gulp.dest(conf.path.dist('vendor')));
-}
 
 function replaceTemplates() {
   return gulp.src(conf.path.src(`**/*.<%- extensions.js %>`))
