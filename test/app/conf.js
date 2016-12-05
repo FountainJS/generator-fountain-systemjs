@@ -21,8 +21,7 @@ const typescriptBase = {
     noImplicitAny: false
   },
   packages: {
-    src: {defaultExtension: 'ts'},
-    typings: {defaultExtension: 'ts'}
+    src: {defaultExtension: 'ts'}
   }
 };
 

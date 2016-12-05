@@ -17,8 +17,7 @@ module.exports = function systemConf(options) {
       noImplicitAny: false
     };
     conf.packages = {
-      src: {defaultExtension: 'ts'},
-      typings: {defaultExtension: 'ts'}
+      src: {defaultExtension: 'ts'}
     };
 
     if (options.framework === 'react') {
