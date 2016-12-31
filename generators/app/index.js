@@ -72,14 +72,18 @@ module.exports = fountain.Base.extend({
 
     gulp() {
       const extensions = this.getExtensions(this.options);
+      let baseUrl = `'./'`;
+      let configPath = `'jspm.config.js'`;
       let entry = `conf.path.src('index.${extensions.js}')`;
       if (this.options.framework === 'angular1') {
         entry = `\`\${${entry}} + \${conf.path.tmp('templateCacheHtml.${extensions.js}')}\``;
       }
       if (this.options.framework === 'angular2') {
-        entry = `conf.path.tmp('templates/index.${extensions.js}')`;
+        baseUrl = `conf.path.tmp('templates')`;
+        configPath = `'../../jspm.config.js'`;
+        entry = `'index.${extensions.js}'`;
       }
-      this.copyTemplate('gulp_tasks', 'gulp_tasks', {entry, extensions});
+      this.copyTemplate('gulp_tasks', 'gulp_tasks', {entry, baseUrl, configPath, extensions});
     },
 
     indexHtml() {

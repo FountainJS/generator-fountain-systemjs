@@ -5,28 +5,28 @@ module.exports = function transforms() {
     // replace first occurence of commonjs require of react-router module;
     let result = content.replace(/var ((\w)+) = require\('react-router'\).((\w)+);/, `import {Router, Route, browserHistory} from 'react-router';`);
     // remove other occurences of commonjs require of react-router module
-    result = result.replace(/var (.*) = require\(('react-router')\).(.*);\n?/g, '');
+    result = result.replace(/var (.*) = require\(('react-router')\).(.*);\r?\n?/g, '');
     // remove es2015 webpack styles imports
-    result = result.replace(/import '.*(styl|.*ss)';\n\n?/g, '');
+    result = result.replace(/import '.*(styl|.*ss)';\r?\n\r?\n?/g, '');
     // remove commonjs webpack styles requires
-    result = result.replace(/require\('.*(styl|.*ss)'\);\n\n?/g, '');
+    result = result.replace(/require\('.*(styl|.*ss)'\);\r?\n\r?\n?/g, '');
     // replace commonjs function imports with es2015 imports
     result = result.replace(
-      /(^|\n)var (.*) = require\(('.*')\).(.*);/g,
+      /(^|\r?\n)var (.*) = require\(('.*')\).(.*);/g,
       '$1import {$2} from $3;'
     );
     // replace commonjs with es2015 imports
     result = result.replace(
-      /(^|\n)var (.*) = require\(('.*')\);/g,
+      /(^|\r?\n)var (.*) = require\(('.*')\);/g,
       '$1import $2 from $3;'
     );
     result = result.replace(
-      /(^|\n)require\(('.*')\);/g,
+      /(^|\r?\n)require\(('.*')\);/g,
       '$1import $2;'
     );
     // replace commonjs conditional require by System.import
     result = result.replace(
-      /(^|\n)(\s+)require\(('.*')\);/g,
+      /(^|\r?\n)(\s+)require\(('.*')\);/g,
       '$1$2System.import($3);'
     );
     // replace imports to add extension
