@@ -1,3 +1,4 @@
+const path = require('path');
 const chai = require('chai');
 const expect = chai.expect;
 const spies = require('chai-spies');
@@ -9,8 +10,8 @@ const TestUtils = require('fountain-generator').TestUtils;
 let context;
 const base = {
   devDependencies: {
-    'jspm': '0.17.0-beta.25',
-    'systemjs-builder': '0.15.23',
+    'jspm': '0.17.0-beta.40',
+    'systemjs-builder': '0.16.3',
     'gulp-replace': '^0.5.4'
   },
   scripts: {
@@ -21,7 +22,7 @@ const base = {
 test.before(() => {
   context = TestUtils.mock('app');
   require('../../generators/app/index');
-  process.chdir('../../');
+  process.chdir(path.resolve(__dirname, '../../'));
 });
 
 test.beforeEach(() => {
@@ -31,17 +32,17 @@ test.beforeEach(() => {
 
 test(`Move dependencies to jspm from 'package.json'`, t => {
   context.updateJson['package.json'] = {
-    dependencies: {angular: '^1.5.0'},
-    devDependencies: {'angular-mocks': '^1.5.0'}
+    dependencies: {angular: '^1.6.4'},
+    devDependencies: {'angular-mocks': '^1.6.2'}
   };
   const expected = {
     devDependencies: {},
     jspm: {
       dependencies: {
-        angular: 'npm:angular@^1.5.0',
-        ts: 'github:frankwallis/plugin-typescript@5.1.2'
+        angular: 'npm:angular@^1.6.4',
+        ts: 'github:frankwallis/plugin-typescript@7.0.3'
       },
-      devDependencies: {'angular-mocks': 'npm:angular-mocks@^1.5.0'}
+      devDependencies: {'angular-mocks': 'npm:angular-mocks@^1.6.2'}
     }
   };
   TestUtils.call(context, 'configuring.pkg', {framework: 'angular1', js: 'typescript'});
@@ -58,24 +59,24 @@ test(`Add 'reflect-metadata' to jspm dependencies if framework is 'angular2'`, t
     }
   };
   TestUtils.call(context, 'configuring.pkg', {framework: 'angular2', js: 'typescript'});
-  t.is(context.updateJson['package.json'].jspm.dependencies['reflect-metadata'], 'npm:reflect-metadata@^0.1.3');
+  t.is(context.updateJson['package.json'].jspm.dependencies['reflect-metadata'], 'npm:reflect-metadata@^0.1.9');
 });
 
 test(`Delete dependencies from 'package.json'`, t => {
   context.updateJson['package.json'] = {
-    dependencies: {react: '^15.0.1'},
-    devDependencies: {'react-addons-test-utils': '^15.0.1'}
+    dependencies: {react: '^15.4.2'},
+    devDependencies: {'react-addons-test-utils': '^15.4.2'}
   };
   const expected = {
     devDependencies: {},
     jspm: {
       dependencies: {
-        'css': 'github:systemjs/plugin-css@^0.1.21',
-        'react': 'npm:react@^15.0.1',
-        'babel-polyfill': 'npm:babel-polyfill@^6.7.4',
-        'es6-shim': 'npm:es6-shim@^0.35.0'
+        'css': 'github:systemjs/plugin-css@^0.1.32',
+        'react': 'npm:react@^15.4.2',
+        'babel-polyfill': 'npm:babel-polyfill@^6.23.0',
+        'es6-shim': 'npm:es6-shim@^0.35.3'
       },
-      devDependencies: {'react-addons-test-utils': 'npm:react-addons-test-utils@^15.0.1'}
+      devDependencies: {'react-addons-test-utils': 'npm:react-addons-test-utils@^15.4.2'}
     }
   };
   TestUtils.call(context, 'configuring.pkg', {framework: 'react', sample: 'todoMVC', js: 'js'});
@@ -85,18 +86,18 @@ test(`Delete dependencies from 'package.json'`, t => {
 
 test(`Delete dependencies from 'package.json'`, t => {
   context.updateJson['package.json'] = {
-    dependencies: {react: '^15.0.1'},
-    devDependencies: {'react-addons-test-utils': '^15.0.1'}
+    dependencies: {react: '^15.4.2'},
+    devDependencies: {'react-addons-test-utils': '^15.4.2'}
   };
   const expected = {
     devDependencies: {},
     jspm: {
       dependencies: {
-        'css': 'github:systemjs/plugin-css@^0.1.21',
-        'react': 'npm:react@^15.0.1',
-        'babel-polyfill': 'npm:babel-polyfill@^6.7.4'
+        'css': 'github:systemjs/plugin-css@^0.1.32',
+        'react': 'npm:react@^15.4.2',
+        'babel-polyfill': 'npm:babel-polyfill@^6.23.0'
       },
-      devDependencies: {'react-addons-test-utils': 'npm:react-addons-test-utils@^15.0.1'}
+      devDependencies: {'react-addons-test-utils': 'npm:react-addons-test-utils@^15.4.2'}
     }
   };
   TestUtils.call(context, 'configuring.pkg', {framework: 'react', sample: 'todoMVC', js: 'babel'});

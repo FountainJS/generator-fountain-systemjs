@@ -27,20 +27,20 @@ module.exports = fountain.Base.extend({
           moveDevDepsToJspm('angular-mocks');
         }
         if (this.options.framework === 'angular2') {
-          packageJson.jspm.dependencies['reflect-metadata'] = 'npm:reflect-metadata@^0.1.3';
+          packageJson.jspm.dependencies['reflect-metadata'] = 'npm:reflect-metadata@^0.1.9';
         }
         if (this.options.framework === 'react') {
-          packageJson.jspm.dependencies['babel-polyfill'] = 'npm:babel-polyfill@^6.7.4';
+          packageJson.jspm.dependencies['babel-polyfill'] = 'npm:babel-polyfill@^6.23.0';
           moveDevDepsToJspm('react-addons-test-utils');
         }
         if (this.options.sample === 'todoMVC') {
-          packageJson.jspm.dependencies.css = 'github:systemjs/plugin-css@^0.1.21';
+          packageJson.jspm.dependencies.css = 'github:systemjs/plugin-css@^0.1.32';
           if (this.options.js === 'js') {
-            packageJson.jspm.dependencies['es6-shim'] = 'npm:es6-shim@^0.35.0';
+            packageJson.jspm.dependencies['es6-shim'] = 'npm:es6-shim@^0.35.3';
           }
         }
         if (this.options.js === 'typescript') {
-          packageJson.jspm.dependencies.ts = 'github:frankwallis/plugin-typescript@5.1.2';
+          packageJson.jspm.dependencies.ts = 'github:frankwallis/plugin-typescript@7.0.3';
         }
 
         return packageJson;
@@ -48,8 +48,8 @@ module.exports = fountain.Base.extend({
 
       this.mergeJson('package.json', {
         devDependencies: {
-          'jspm': '0.17.0-beta.25',
-          'systemjs-builder': '0.15.23',
+          'jspm': '0.17.0-beta.40',
+          'systemjs-builder': '0.16.3',
           'gulp-replace': '^0.5.4'
         },
         scripts: {
