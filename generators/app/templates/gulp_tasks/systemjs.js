@@ -20,7 +20,7 @@ gulp.task('systemjs', systemjs);
 gulp.task('systemjs:html', updateIndexHtml);
 
 function systemjs(done) {
-  const builder = new Builder('./', 'jspm.config.js');
+  const builder = new Builder(<%- baseUrl %>, 'jspm.config.js');
   builder.config({
     paths: {
       "github:*": "jspm_packages/github/*",
@@ -58,7 +58,7 @@ function replaceTemplates() {
 function updateIndexHtml() {
   return gulp.src(conf.path.src('index.html'))
     .pipe(replace(
-      /<script src="jspm_packages\/system.js">[\s\S]*System.import.*\n\s*<\/script>/,
+      /<script src="jspm_packages\/system.js">[\s\S]*System.import.*\r?\n\s*<\/script>/,
       `<script src="index.js"></script>`
     ))
 <% if (framework === 'angular2') { -%>
