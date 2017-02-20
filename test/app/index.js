@@ -10,8 +10,8 @@ const TestUtils = require('fountain-generator').TestUtils;
 let context;
 const base = {
   devDependencies: {
-    'jspm': '0.17.0-beta.32',
-    'systemjs-builder': '0.15.35',
+    'jspm': '0.17.0-beta.25',
+    'systemjs-builder': '0.15.23',
     'gulp-replace': '^0.5.4'
   },
   scripts: {

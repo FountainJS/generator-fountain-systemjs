@@ -32,7 +32,7 @@ module.exports = function transforms() {
     // replace imports to add extension
     result = result.replace(
       /import (.*) from '(.|..)\/(.*)'/g,
-      `import $1 from \'$2\/$3.${this.getExtensions(this.options).js}\'`
+      `import $1 from '$2/$3.${this.getExtensions(this.options).js}'`
     );
     // replace commonjs with es2015 exports
     result = result.replace(

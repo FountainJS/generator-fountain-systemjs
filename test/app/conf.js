@@ -44,7 +44,7 @@ test('systemConf with angular1/typescript', t => {
   const options = {js: 'typescript', framework: 'angular1'};
   const expected = _.mergeWith({}, conf, typescriptBase, {
     packages: {
-      ['.tmp']: {
+      '.tmp': {
         defaultExtension: 'ts'
       }
     }
