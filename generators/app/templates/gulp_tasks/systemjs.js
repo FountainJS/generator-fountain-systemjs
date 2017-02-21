@@ -23,8 +23,8 @@ function systemjs(done) {
   const builder = new Builder(<%- baseUrl %>, 'jspm.config.js');
   builder.config({
     paths: {
-      "github:*": "jspm_packages/github/*",
-      "npm:*": "jspm_packages/npm/*"
+      'github:*': 'jspm_packages/github/*',
+      'npm:*': 'jspm_packages/npm/*'
     },
     packageConfigPaths: [
       'npm:@*/*.json',
